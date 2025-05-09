@@ -185,20 +185,37 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Mobile menu toggle
 const menuToggle = document.querySelector('.menu-toggle');
-const nav = document.querySelector('nav ul');
+const navMobile = document.querySelector('.nav-mobile');
+const body = document.body;
 
 menuToggle.addEventListener('click', () => {
-    nav.classList.toggle('active');
     menuToggle.classList.toggle('active');
+    navMobile.classList.toggle('active');
+    body.style.overflow = navMobile.classList.contains('active') ? 'hidden' : '';
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.nav-mobile .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navMobile.classList.remove('active');
+        body.style.overflow = '';
+    });
 });
 
 // Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
-    if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-        nav.classList.remove('active');
+    if (!navMobile.contains(e.target) && !menuToggle.contains(e.target) && navMobile.classList.contains('active')) {
         menuToggle.classList.remove('active');
+        navMobile.classList.remove('active');
+        body.style.overflow = '';
     }
 });
+
+// Remover o código antigo do sidebar para evitar conflitos
+if (sidebar) {
+    sidebar.style.display = 'none';
+}
 
 // Form validation
 const nameInput = document.getElementById('name');
