@@ -105,21 +105,6 @@ function add3DEffect(card) {
   });
 }
 
-// Efeito 3D na imagem do hero
-function addHeroImage3D() {
-  const heroImage = document.querySelector('.hero-image img');
-  
-  document.addEventListener('mousemove', (e) => {
-    const x = e.clientX / window.innerWidth;
-    const y = e.clientY / window.innerHeight;
-    
-    const rotateX = (y - 0.5) * 20;
-    const rotateY = (x - 0.5) * 20;
-    
-    heroImage.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  });
-}
-
 // Remover loading após carregar a página
 window.addEventListener('load', () => {
   setTimeout(() => {
@@ -275,7 +260,6 @@ window.addEventListener('load', animateOnScroll);
 // Inicializar
 document.addEventListener('DOMContentLoaded', () => {
   create3DParticles();
-  addHeroImage3D();
   
   document.querySelectorAll('.service-card, .portfolio-card, .skill-item').forEach(add3DEffect);
   
